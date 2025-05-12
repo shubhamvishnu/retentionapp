@@ -10,63 +10,56 @@
 
     <button id="bb-cancel" href="#">Cancel Subscription</button>
 
-    <!-- Chargebee Growth + Retention Script -->
+    <!-- Include Chargebee Retention Script -->
     <script
-  type="text/javascript"
-  src="https://app.retention.chargebee.com/js/current/?compiled=true"></script>
-<script type="text/javascript">
-  if (window.Brightback) {
-    window.Brightback.handleData({
-      app_id: EPoARP3Dxn 
-      subscription_id: Azq8pVUg4zUo52EP 
-    });
-  }
-</script>
+        type="text/javascript"
+        src="https://app.retention.chargebee.com/assets/webpack/retention.js">
+    </script>
+
     <script>
-        
-  (function () {
-    function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-    }
-
-    function showError(message) {
-        const div = document.createElement('div');
-        div.style.background = '#ffe0e0';
-        div.style.color = '#b00000';
-        div.style.padding = '10px';
-        div.style.border = '1px solid #b00000';
-        div.style.marginTop = '20px';
-        div.style.fontFamily = 'sans-serif';
-        div.textContent = "⚠️ " + message;
-        document.body.appendChild(div);
-    }
-
-    try {
-        const customerId = getQueryParam("customer_id");
-        const email = getQueryParam("email");
-
-        if (!customerId || !email) {
-            showError("Missing customer_id or email in the URL.");
-            return;
-        }
-
-        const cbretention = new ChargebeeRetention({
-            api_key: "EPoARP3Dxn"
-        });
-
-        cbretention.init({
-            customer_id: customerId,
-            user: {
-                email: email,
-                roles: ["user"]  // Optional: you can make roles dynamic too
+        (function () {
+            function getQueryParam(param) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
             }
-        });
-    } catch (err) {
-        showError("An error occurred: " + err.message);
-        console.error(err);
-    }
-})();
+
+            function showError(message) {
+                const div = document.createElement('div');
+                div.style.background = '#ffe0e0';
+                div.style.color = '#b00000';
+                div.style.padding = '10px';
+                div.style.border = '1px solid #b00000';
+                div.style.marginTop = '20px';
+                div.style.fontFamily = 'sans-serif';
+                div.textContent = "⚠️ " + message;
+                document.body.appendChild(div);
+            }
+
+            try {
+                const customerId = getQueryParam("customer_id");
+                const email = getQueryParam("email");
+
+                if (!customerId || !email) {
+                    showError("Missing customer_id or email in the URL.");
+                    return;
+                }
+
+                const cbretention = new ChargebeeRetention({
+                    api_key: "EPoARP3Dxn"
+                });
+
+                cbretention.init({
+                    customer_id: customerId,
+                    user: {
+                        email: email,
+                        roles: ["user"]
+                    }
+                });
+            } catch (err) {
+                showError("An error occurred: " + err.message);
+                console.error(err);
+            }
+        })();
     </script>
 </body>
 </html>
